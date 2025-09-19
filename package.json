@@ -3,8 +3,9 @@
   "displayName": "DevNotes",
   "description": "A lightweight VS Code extension to track features, bugs, and notes during development.",
   "version": "1.0.0",
-  "publisher": "santoshvarma",
+  "publisher": "SantoshVarmaAddala",
   "icon": "assets/devnoteslogo.png",
+  "license": "MIT",
   "engines": {
     "vscode": "^1.85.0"
   },
@@ -61,6 +62,7 @@
   },
   "devDependencies": {
     "@types/node": "^18.0.0",
+    "@types/uuid": "^10.0.0",
     "@types/vscode": "^1.85.0",
     "typescript": "^5.0.0",
     "vscode-test": "^1.6.1"
