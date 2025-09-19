@@ -1,7 +1,7 @@
 import * as vscode from "vscode";
 import { DevNotesProvider } from "../tree/devNotesProvider";
 import { FeatureItem } from "../tree/noteItem";
-import { v4 as uuidv4 } from "uuid";
+import { getRandomUUID } from "../utils/idGenerator";
 
 export function registerAddNote(provider: DevNotesProvider) {
   return vscode.commands.registerCommand("devnotes.addNote", async (item?: FeatureItem) => {
@@ -31,7 +31,7 @@ export function registerAddNote(provider: DevNotesProvider) {
     if (!noteText) return;
 
     provider.addNote(featureId, {
-      id: uuidv4(),
+      id: getRandomUUID(),
       content: noteText,
       createdAt: new Date().toISOString(),
       status: "open"

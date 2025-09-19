@@ -1,6 +1,6 @@
 import * as vscode from "vscode";
 import { DevNotesProvider } from "../tree/devNotesProvider";
-import { v4 as uuidv4 } from "uuid"; // for unique ids
+import { getRandomUUID } from "../utils/idGenerator"; 
 
 export function registerAddFeature(provider: DevNotesProvider) {
   return vscode.commands.registerCommand("devnotes.addFeature", async () => {
@@ -11,7 +11,7 @@ export function registerAddFeature(provider: DevNotesProvider) {
 
     if (title) {
       provider.addFeature({
-        id: uuidv4(),
+        id: getRandomUUID(),
         title,
         type: "feature",
         status: "todo",
