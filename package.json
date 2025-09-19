@@ -7,7 +7,10 @@
   "engines": {
     "vscode": "^1.85.0"
   },
-  "categories": ["Notebooks", "Visualization"],
+  "categories": [
+    "Notebooks",
+    "Visualization"
+  ],
   "activationEvents": [
     "onCommand:devnotes.addFeature",
     "onCommand:devnotes.addNote",
@@ -47,10 +50,13 @@
     "test": "node ./out/test/runTest.js"
   },
   "devDependencies": {
-    "@types/vscode": "^1.85.0",
     "@types/node": "^18.0.0",
-    "typescript": "^5.0.0",
+    "@types/vscode": "^1.85.0",
     "tslint": "^6.1.3",
+    "typescript": "^5.0.0",
     "vscode-test": "^1.6.1"
+  },
+  "dependencies": {
+    "uuid": "^13.0.0"
   }
 }

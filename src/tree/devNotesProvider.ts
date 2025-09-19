@@ -1,41 +1,67 @@
 import * as vscode from "vscode";
-import { NoteItem } from "./noteItem";
+import {DevNotesData } from "../models/feature";
+import { StorageManager } from "../storage/strorageManager";
 
-export class DevNotesProvider implements vscode.TreeDataProvider<NoteItem> {
-  private _onDidChangeTreeData = new vscode.EventEmitter<NoteItem | undefined>();
-  readonly onDidChangeTreeData = this._onDidChangeTreeData.event;
+export class DevNotesProvider implements vscode.TreeDataProvider<any> {
 
-  private items: NoteItem[] = [];
+  private data: DevNotesData;
+  private storage: StorageManager;
 
-  constructor(private context: vscode.ExtensionContext) {}
+  private _onDidChangeTreeData: vscode.EventEmitter<void> = 
+    new vscode.EventEmitter<void>();
+  readonly onDidChangeTreeData: vscode.Event<void> = this._onDidChangeTreeData.event;
 
-  refresh(): void {
-    this._onDidChangeTreeData.fire(undefined);
+  constructor () {
+    this.storage = new StorageManager();
+    this.data = this.storage.loadData();
   }
 
-  getTreeItem(element: NoteItem): vscode.TreeItem {
-    return element;
+  getTreeItem(element: any): vscode.TreeItem {
+      return element;
   }
 
-  getChildren(element?: NoteItem): Thenable<NoteItem[]> {
+  getChildren(element?: any): Thenable<any[]> {
     if (!element) {
-      return Promise.resolve(this.items);
+      // Top level: features
+      return Promise.resolve(
+        this.data.features.map(
+          (f) =>
+            new vscode.TreeItem(
+              f.title,
+              vscode.TreeItemCollapsibleState.Collapsed
+            )
+        )
+      );
+    } else {
+      // Children: notes
+      return Promise.resolve(
+        (this.data.features.find((f) => f.title === element.label)?.notes ||
+          []).map((n) => new vscode.TreeItem(n.content))
+      );
     }
-    return Promise.resolve(element.children);
   }
 
-  addFeature(label: string) {
-    this.items.push(new NoteItem(label));
-    this.refresh();
+  public addFeature(feature: any) {
+    this.data.features.push(feature);
+    this.storage.saveData(this.data);
+    this._onDidChangeTreeData.fire();
   }
 
-  addNoteToFeature(feature: NoteItem, note: string) {
-    feature.children.push(new NoteItem(note));
-    this.refresh();
+  public addNote(featureId: string, note: any) {
+    const feature = this.data.features.find((f) => f.id === featureId);
+    if (feature) {
+      feature.notes.push(note);
+      this.storage.saveData(this.data);
+      this._onDidChangeTreeData.fire();
+    }
   }
 
-  markCompleted(item: NoteItem) {
-    item.completed = true;
-    this.refresh();
+  public markCompleted(featureId: string) {
+    const feature = this.data.features.find((f) => f.id === featureId);
+    if (feature) {
+      feature.status = "completed";
+      this.storage.saveData(this.data);
+      this._onDidChangeTreeData.fire();
+    }
   }
 }

@@ -5,7 +5,7 @@ import { registerAddNote } from "./commands/addNote";
 import { registerMarkCompleted } from "./commands/markCompleted";
 
 export function activate(context: vscode.ExtensionContext) {
-  const devNotesProvider = new DevNotesProvider(context);
+  const devNotesProvider = new DevNotesProvider();
 
   vscode.window.registerTreeDataProvider("devnotesView", devNotesProvider);
 
