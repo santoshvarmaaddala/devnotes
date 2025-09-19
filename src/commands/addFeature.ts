@@ -13,7 +13,11 @@ export function registerAddFeature(provider: DevNotesProvider) {
       provider.addFeature({
         id: uuidv4(),
         title,
-        status: "pending",
+        type: "feature",
+        status: "todo",
+        priority: "medium",
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
         notes: [],
       });
     }
