@@ -13,6 +13,7 @@ export function activate(context: vscode.ExtensionContext) {
   context.subscriptions.push(registerAddFeature(devNotesProvider));
   context.subscriptions.push(registerAddNote(devNotesProvider));
   context.subscriptions.push(registerMarkCompleted(devNotesProvider));
+  
 
   vscode.window.showInformationMessage("DevNotes activated!");
 }

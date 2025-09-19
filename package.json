@@ -1,6 +1,6 @@
 {
-  "name": "devnotes",
-  "displayName": "DevNotes",
+  "name": "devnotesx",
+  "displayName": "DevNotesX",
   "description": "A lightweight VS Code extension to track features, bugs, and notes during development.",
   "version": "1.0.0",
   "publisher": "SantoshVarmaAddala",
@@ -10,23 +10,24 @@
     "vscode": "^1.85.0"
   },
   "categories": [
-    "Productivity",
+    "Notebooks",
+    "Visualization",
     "Other"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/santoshvarmaaddala/devnotes"
+    "url": "https://github.com/santoshvarmaaddala/devnotesx"
   },
   "bugs": {
-    "url": "https://github.com/santoshvarmaaddala/devnotes/issues"
+    "url": "https://github.com/santoshvarmaaddala/devnotesx/issues"
   },
-  "homepage": "https://github.com/santoshvarmaaddala/devnotes#readme",
+  "homepage": "https://github.com/santoshvarmaaddala/devnotesx#readme",
   "activationEvents": [
-    "onCommand:devnotes.addFeature",
-    "onCommand:devnotes.addNote",
-    "onCommand:devnotes.markCompleted",
-    "onView:devnotesView"
-  ],
+  "onCommand:devnotes.addFeature",
+  "onCommand:devnotes.addNote",
+  "onCommand:devnotes.markCompleted",
+  "onView:devnotesView"
+],
   "main": "./out/extension.js",
   "contributes": {
     "views": {
